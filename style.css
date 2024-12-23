@@ -1,24 +1,24 @@
-/* Set the background color to the GNU/Linux distribution's primary color */
+/* Set the background color to a dark theme for a modern look */
 body {
-    background-color: #ffeecc;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
 }
 
-/* Set the font family to a sans-serif font */
-body {
-    font-family: Arial, sans-serif;
-}
-
-/* h1 larger */
+/* h1 larger with a retro font */
 h1 {
     padding-top: 25px;
     font-size: 3rem;
+    font-family: 'Courier New', Courier, monospace;
+    color: #e74c3c;
 }
 
 /* Style the navigation menu */
 nav {
-    color: #fff;
-    padding-top: 10px;
-    padding-bottom: 0px;
+    background-color: #34495e;
+    padding: 10px 0;
+    text-align: center;
 }
 
 nav ul {
@@ -33,13 +33,16 @@ nav li {
 }
 
 nav a {
-    color: #fff;
+    color: #ecf0f1;
     font-size: 1.8rem;
     text-decoration: none;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
 }
 
 nav a:hover {
-    text-decoration: underline;
+    background-color: #e74c3c;
+    color: #fff;
 }
 
 /* Style the main content area */
@@ -48,21 +51,24 @@ main {
     max-width: 75%;
     text-align: left;
     margin: 0 auto;
+    background-color: #34495e;
+    border-radius: 10px;
 }
 
 /* Style the footer */
 footer {
-    background-color: #333;
-    color: #fff;
+    background-color: #2c3e50;
+    color: #ecf0f1;
     padding: 10px;
     text-align: center;
+    border-top: 2px solid #e74c3c;
 }
 
 /* Add mobile view */
 @media only screen and (max-width: 600px) {
     main {
-        padding: 50px;
-        max-width: 80%;
+        padding: 20px;
+        max-width: 90%;
         text-align: left;
     }
     
@@ -71,6 +77,7 @@ footer {
     }
     
     nav li {
+        display: block;
         margin: 10px 0;
     }
     
@@ -84,15 +91,15 @@ footer {
     font-size: 1.4rem;
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #e74c3c;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
     margin-right: 10px;
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
 
 .button:hover {
-    background-color: #0062cc;
+    background-color: #c0392b;
 }
