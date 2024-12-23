@@ -4,11 +4,30 @@
         <title>Libero GNU/Linux</title>
         <link rel="icon" type="image/png" href="icons/icon.png">
         <link rel="stylesheet" href="style.css">
+        <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        <script>
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    includedLanguages: 'en,es,de,fr,it,nl,pt-PT,ja',
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                }, 'google_translate_element');
+            }
+    
+            document.addEventListener('DOMContentLoaded', function() {
+                if (typeof googleTranslateElementInit === 'function') {
+                    googleTranslateElementInit();
+                } else {
+                    console.error('Google Translate script not loaded.');
+                }
+            });
+        </script>
     </head>
     <body>
-        <header>
+        <header>          
+            <div id="google_translate_element"></div> 
             <center>
-            <h1><img src="icons/icon.png" alt="Libero GNU/Linux Icon" style="vertical-align: middle; width: 96px; height: 96px;"> Libero GNU/Linux</h1>
+                <h1><img src="icons/icon.png" alt="Libero GNU/Linux Icon" style="vertical-align: middle; width: 96px; height: 96px;"> Libero GNU/Linux</h1>
             </center>
             <a href="https://github.com/liberolinux" style="position: absolute; top: 10px; right: 10px;">
                 <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" style="width: 48px; height: 48px;">
