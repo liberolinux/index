@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Libero GNU/Linux - A specialized live distribution based on Gentoo Linux for system administration and automated deployment">
+    <meta name="keywords" content="Libero, GNU/Linux, Gentoo, Live CD, System Administration, i486, Legacy Hardware">
+    <meta name="author" content="André Machado - Libero GNU/Linux Project">
+    <title>Libero GNU/Linux - Freedom in Computing</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #764ba2;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #764ba2;
+        }
+        
+        main {
+            margin-top: 80px;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .features {
+            background: white;
+            padding: 4rem 0;
+        }
+        
+        .features h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #333;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: #764ba2;
+        }
+        
+        .tech-specs {
+            background: #f8f9fa;
+            padding: 4rem 0;
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .spec-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .spec-item h4 {
+            color: #764ba2;
+            margin-bottom: 0.5rem;
+        }
+        
+        .download-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .version-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+        
+        .download-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .footer-links {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Libero GNU/Linux</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#download">Download</a></li>
+                <li><a href="#docs">Documentation</a></li>
+                <li><a href="#github" target="_blank">GitHub</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Libero GNU/Linux</h1>
+                <p>Freedom in Computing - A specialized live distribution for system administration and legacy hardware</p>
+                <div class="cta-buttons">
+                    <a href="#download" class="btn btn-primary">Download v1.0</a>
+                    <a href="https://github.com/liberolinux" class="btn btn-secondary" target="_blank">View on GitHub</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Why Choose Libero?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h3>Dual Boot Modes</h3>
+                        <p>Switch between Admin mode for system maintenance and Installer mode for automated Gentoo deployment. Perfect for different use cases.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💾</div>
+                        <h3>Legacy Hardware Support</h3>
+                        <p>Optimized for i486 architecture, bringing modern tools and capabilities to older hardware that other distributions have left behind.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Automated Installation</h3>
+                        <p>Integrated gentoo-install framework provides hands-off system deployment with advanced features like LUKS encryption and LVM.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Security First</h3>
+                        <p>Built with modern security practices, including full disk encryption support, secure boot preparation, and network security tools.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <h3>Live Environment</h3>
+                        <p>RAM-based system with overlay support and ZSTD compression for optimal performance and space efficiency.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Gentoo Foundation</h3>
+                        <p>Built on the solid foundation of Gentoo Linux with systemd, providing a stable and modern computing environment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tech-specs">
+            <div class="container">
+                <h2>Technical Specifications</h2>
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <h4>Architecture</h4>
+                        <p>i486 (32-bit x86)</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>Base System</h4>
+                        <p>Gentoo Linux stage3-i486-systemd</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>Init System</h4>
+                        <p>systemd with modern service management</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>Bootloader</h4>
+                        <p>GRUB 2 with El Torito boot support</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>Kernel</h4>
+                        <p>Gentoo binary kernel with live CD modules</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>Initramfs</h4>
+                        <p>dracut with dmsquash-live and network support</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>Compression</h4>
+                        <p>ZSTD level 22 for optimal performance</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>Network</h4>
+                        <p>dhcpcd, wpa_supplicant, SSH support</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="download" class="download-section">
+            <div class="container">
+                <h2>Download Libero GNU/Linux</h2>
+                <div class="version-info">
+                    <h3>Current Release: v1.0 Admin CD</h3>
+                    <p><strong>Architecture:</strong> i486</p>
+                    <p><strong>Size:</strong> ~600 MB (compressed)</p>
+                    <p><strong>Release Date:</strong> May 2025</p>
+                    <p><strong>License:</strong> GPL-3.0</p>
+                </div>
+                
+                <div class="download-links">
+                    <a href="https://github.com/liberolinux/ISO/releases/download/v1.0/libero-admincd-i486-1.0.iso" class="btn btn-primary">
+                        📥 Download ISO (Direct)
+                    </a>
+                    <a href="https://github.com/liberolinux" class="btn btn-secondary" target="_blank">
+                        📋 View Source Code
+                    </a>
+                </div>
+                
+                <h3 style="margin-top: 3rem;">Quick Start</h3>
+                <div class="code-block">
+# Download and verify<br>
+wget https://github.com/liberolinux/ISO/releases/download/v1.0/libero-admincd-i486-1.0.iso<br><br>
+
+# Test with QEMU<br>
+qemu-system-i386 -m 1024 -cdrom libero-admincd-i486-1.0.iso<br><br>
+
+# Write to CD (replace /dev/sr0 with your CD drive)<br>
+wodim -v dev=/dev/sr0 speed=4 -eject libero-admincd-i486-1.0.iso
+                </div>
+            </div>
+        </section>
+
+        <section id="docs" class="features">
+            <div class="container">
+                <h2>Documentation & Support</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📖</div>
+                        <h3>Getting Started</h3>
+                        <p>Complete guide for booting, using both modes, and understanding the system architecture.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔨</div>
+                        <h3>Build Instructions</h3>
+                        <p>Step-by-step instructions for building your own Libero GNU/Linux ISO from source.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🤝</div>
+                        <h3>Contributing</h3>
+                        <p>Join our community! Learn how to contribute code, documentation, or report issues.</p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 2rem;">
+                    <h3>System Requirements</h3>
+                    <div class="code-block" style="text-align: left; max-width: 600px; margin: 1rem auto;">
+Minimum Requirements:<br>
+• CPU: i486 or higher (32-bit x86)<br>
+• RAM: 256 MB (512 MB recommended)<br>
+• Storage: CD/DVD drive or USB port<br>
+• Network: Ethernet or Wi-Fi for installer mode<br><br>
+
+Build Requirements:<br>
+• Host OS: Linux with root access<br>
+• Dependencies: bash, tar, wget, sudo, chroot<br>
+• Tools: squashfs-tools, grub2, xorriso, qemu<br>
+• Storage: ~10 GB free space<br>
+• Network: Internet connection
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/liberolinux" target="_blank">GitHub</a>
+                <a href="https://github.com/liberolinux/issues" target="_blank">Issues</a>
+                <a href="https://wiki.gentoo.org" target="_blank">Gentoo Docs</a>
+                <a href="mailto:machaddr@falanet.org">Contact</a>
+            </div>
+            <p>&copy; 2025 Libero GNU/Linux Project. Licensed under GPL-3.0.</p>
+            <p>Maintainer: André Machado | Built with ❤️ for the community</p>
+            <p><em>"Freedom in Computing - Empowering system administrators with reliable, modern tools"</em></p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate feature cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all feature cards
+            document.querySelectorAll('.feature-card, .spec-item').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
