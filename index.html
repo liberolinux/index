@@ -9,6 +9,22 @@
     <title>Libero GNU/Linux - Freedom in Computing</title>
     
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap');
+        
+        :root {
+            --terminal-bg: #0a0a0a;
+            --terminal-green: #00ff41;
+            --terminal-green-dim: #00cc33;
+            --terminal-amber: #ffb000;
+            --terminal-red: #ff3333;
+            --terminal-cyan: #00ffff;
+            --terminal-purple: #ff00ff;
+            --terminal-white: #ffffff;
+            --terminal-gray: #666666;
+            --terminal-dark-gray: #1a1a1a;
+            --terminal-border: #333333;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -16,11 +32,43 @@
         }
         
         body {
-            font-family: 'Courier New', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--terminal-green);
+            background: var(--terminal-bg);
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Terminal scanlines effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                transparent 50%,
+                rgba(0, 255, 65, 0.02) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 10000;
+            animation: scanlines 0.1s linear infinite;
+        }
+        
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(4px); }
+        }
+        
+        /* Terminal glow effect */
+        .terminal-glow {
+            text-shadow: 
+                0 0 5px currentColor,
+                0 0 10px currentColor,
+                0 0 15px currentColor;
         }
         
         .container {
@@ -30,13 +78,13 @@
         }
         
         header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            background: rgba(10, 10, 10, 0.98);
+            border-bottom: 2px solid var(--terminal-green);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            backdrop-filter: blur(10px);
         }
         
         nav {
@@ -48,8 +96,15 @@
         
         .logo {
             font-size: 1.8rem;
-            font-weight: bold;
-            color: #764ba2;
+            font-weight: 700;
+            color: var(--terminal-green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .logo::before {
+            content: '> ';
+            color: var(--terminal-amber);
         }
         
         .nav-links {
@@ -60,13 +115,39 @@
         
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: var(--terminal-green);
             font-weight: 500;
-            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+        }
+        
+        .nav-links a::before {
+            content: '[ ';
+            color: var(--terminal-amber);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a::after {
+            content: ' ]';
+            color: var(--terminal-amber);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
         
         .nav-links a:hover {
-            color: #764ba2;
+            color: var(--terminal-amber);
+            border: 1px solid var(--terminal-green);
+            background: rgba(0, 255, 65, 0.1);
+        }
+        
+        .nav-links a:hover::before,
+        .nav-links a:hover::after {
+            opacity: 1;
         }
         
         main {
@@ -75,174 +156,395 @@
         
         .hero {
             text-align: center;
-            padding: 4rem 0;
-            color: white;
+            padding: 6rem 0;
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(0, 255, 65, 0.1) 0%, transparent 50%),
+                var(--terminal-bg);
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 255, 65, 0.03) 2px,
+                    rgba(0, 255, 65, 0.03) 4px
+                );
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
         }
         
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: var(--terminal-green);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 700;
+            animation: terminal-flicker 2s infinite;
         }
         
-        .hero p {
+        @keyframes terminal-flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .hero .subtitle {
             font-size: 1.2rem;
             margin-bottom: 2rem;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            color: var(--terminal-amber);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .hero .subtitle::before {
+            content: '// ';
+            color: var(--terminal-gray);
         }
         
         .cta-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 2rem;
             justify-content: center;
             flex-wrap: wrap;
+            margin-top: 3rem;
         }
         
         .btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 25px;
+            padding: 15px 40px;
+            border: 2px solid var(--terminal-green);
+            background: transparent;
             font-size: 1rem;
             font-weight: 600;
             text-decoration: none;
             cursor: pointer;
             transition: all 0.3s;
             display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'JetBrains Mono', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--terminal-green);
+            transition: all 0.3s;
+            transform: translate(-50%, -50%);
+            z-index: -1;
         }
         
         .btn-primary {
-            background: #ff6b6b;
-            color: white;
+            color: var(--terminal-green);
+            border-color: var(--terminal-green);
+        }
+        
+        .btn-primary:hover {
+            color: var(--terminal-bg);
+            box-shadow: 0 0 20px var(--terminal-green);
+        }
+        
+        .btn-primary:hover::before {
+            width: 100%;
+            height: 100%;
         }
         
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 2px solid white;
+            color: var(--terminal-amber);
+            border-color: var(--terminal-amber);
         }
         
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        .btn-secondary::before {
+            background: var(--terminal-amber);
         }
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="terminal-glow">Libero GNU/Linux</h1>
+                    <p class="subtitle">Freedom in Computing - A specialized live distribution for system administration and legacy hardware</p>
+                    <div class="cta-buttons">
+                        <a href="#download" class="btn btn-primary">Download v1.1</a>
+                        <a href="https://github.com/liberolinux" class="btn btn-secondary" target="_blank">View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
         
         .features {
-            background: white;
-            padding: 4rem 0;
+            background: var(--terminal-dark-gray);
+            padding: 6rem 0;
+            border-top: 1px solid var(--terminal-border);
+            border-bottom: 1px solid var(--terminal-border);
         }
         
         .features h2 {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
             font-size: 2.5rem;
-            color: #333;
+            color: var(--terminal-green);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .features h2::before {
+            content: '=== ';
+            color: var(--terminal-amber);
+        }
+        
+        .features h2::after {
+            content: ' ===';
+            color: var(--terminal-amber);
         }
         
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
         
         .feature-card {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
+            background: var(--terminal-bg);
+            padding: 2.5rem;
+            border: 1px solid var(--terminal-border);
+            text-align: left;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--terminal-green), var(--terminal-amber));
+            transform: scaleX(0);
             transition: transform 0.3s;
         }
         
         .feature-card:hover {
-            transform: translateY(-5px);
+            border-color: var(--terminal-green);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
         }
         
         .feature-icon {
-            font-size: 3rem;
+            font-size: 2rem;
             margin-bottom: 1rem;
+            color: var(--terminal-amber);
         }
         
         .feature-card h3 {
             margin-bottom: 1rem;
-            color: #764ba2;
+            color: var(--terminal-green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .feature-card h3::before {
+            content: '> ';
+            color: var(--terminal-amber);
+        }
+        
+        .feature-card p {
+            color: var(--terminal-white);
+            line-height: 1.8;
         }
         
         .tech-specs {
-            background: #f8f9fa;
-            padding: 4rem 0;
+            background: var(--terminal-bg);
+            padding: 6rem 0;
         }
         
-        .specs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+        .tech-specs h2 {
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: 2.5rem;
+            color: var(--terminal-cyan);
+            text-transform: uppercase;
+                <h3 style="margin-top: 3rem; color: var(--terminal-green); text-transform: uppercase;">Quick Start</h3>
+                <div class="code-block">
+<span class="terminal-comment"># Download and verify</span><br>
+<span class="terminal-command">wget</span> https://github.com/liberolinux/ISO/releases/download/v1.1/libero-admincd-i486-1.1.iso<br><br>
+
+<span class="terminal-comment"># Test with QEMU</span><br>
+<span class="terminal-command">qemu-system-i386</span> -m 1024 -cdrom libero-admincd-i486-1.1.iso<br><br>
+
+<span class="terminal-comment"># Write to CD (replace /dev/sr0 with your CD drive)</span><br>
+<span class="terminal-command">wodim</span> -v dev=/dev/sr0 speed=4 -eject libero-admincd-i486-1.1.iso<span class="terminal-cursor"></span>
+                </div>
+            padding: 2rem;
+            border: 1px solid var(--terminal-border);
+            border-left: 4px solid var(--terminal-cyan);
+            transition: all 0.3s;
         }
         
-        .spec-item {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        .spec-item:hover {
+            border-left-color: var(--terminal-amber);
+            transform: translateX(10px);
         }
         
         .spec-item h4 {
-            color: #764ba2;
+            color: var(--terminal-cyan);
             margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
-        .download-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
+        .spec-item h4::before {
+            content: '$ ';
+            color: var(--terminal-amber);
+        }
+        
+        .spec-item p {
+            color: var(--terminal-white);
+        }
+                    <div class="code-block" style="text-align: left; max-width: 700px; margin: 1rem auto;">
+<span class="terminal-comment"># Minimum Requirements:</span><br>
+<span class="terminal-prompt">•</span> <span class="terminal-command">CPU:</span> i486 or higher (32-bit x86)<br>
+<span class="terminal-prompt">•</span> <span class="terminal-command">RAM:</span> 256 MB (512 MB recommended)<br>
+<span class="terminal-prompt">•</span> <span class="terminal-command">Storage:</span> CD/DVD drive or USB port<br>
+<span class="terminal-prompt">•</span> <span class="terminal-command">Network:</span> Ethernet or Wi-Fi for installer mode<br><br>
+
+<span class="terminal-comment"># Build Requirements:</span><br>
+<span class="terminal-prompt">•</span> <span class="terminal-command">Host OS:</span> Linux with root access<br>
+<span class="terminal-prompt">•</span> <span class="terminal-command">Dependencies:</span> bash, tar, wget, sudo, chroot<br>
+<span class="terminal-prompt">•</span> <span class="terminal-command">Tools:</span> squashfs-tools, grub2, xorriso, qemu<br>
+<span class="terminal-prompt">•</span> <span class="terminal-command">Storage:</span> ~10 GB free space<br>
+<span class="terminal-prompt">•</span> <span class="terminal-command">Network:</span> Internet connection<span class="terminal-cursor"></span>
+                    </div>
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
         
         .version-info {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 10px;
+            background: var(--terminal-bg);
+            border: 1px solid var(--terminal-green);
+            padding: 2.5rem;
             margin: 2rem auto;
-            max-width: 600px;
+            max-width: 700px;
+            text-align: left;
+        }
+        
+        .version-info h3 {
+            color: var(--terminal-amber);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+        
+        .version-info h3::before {
+            content: '>>> ';
+            color: var(--terminal-green);
+        }
+        
+        .version-info p {
+            margin: 0.5rem 0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .version-info strong {
+            color: var(--terminal-cyan);
         }
         
         .download-links {
             display: flex;
-            gap: 1rem;
+            gap: 2rem;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
         
         footer {
-            background: #333;
-            color: white;
+            background: var(--terminal-bg);
+            color: var(--terminal-white);
             text-align: center;
-            padding: 2rem 0;
+            padding: 3rem 0;
+            border-top: 2px solid var(--terminal-green);
         }
         
         .footer-links {
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
         }
         
         .footer-links a {
-            color: #ccc;
+            color: var(--terminal-green);
             text-decoration: none;
-            margin: 0 1rem;
+            margin: 0 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
         }
         
         .footer-links a:hover {
-            color: white;
+            color: var(--terminal-amber);
+        }
+        
+        .footer-links a::before {
+            content: '[ ';
+            color: var(--terminal-gray);
+        }
+        
+        .footer-links a::after {
+            content: ' ]';
+            color: var(--terminal-gray);
         }
         
         .code-block {
-            background: #2d3748;
-            color: #e2e8f0;
-            padding: 1rem;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            margin: 1rem 0;
+            background: var(--terminal-bg);
+            color: var(--terminal-green);
+            padding: 2rem;
+            border: 1px solid var(--terminal-border);
+            border-left: 4px solid var(--terminal-green);
+            font-family: 'JetBrains Mono', monospace;
+            margin: 2rem 0;
             overflow-x: auto;
+            position: relative;
         }
         
+        .code-block::before {
+            content: 'user@libero:~$ ';
+            color: var(--terminal-amber);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 1rem;
+        }
+        
+        .terminal-prompt {
+            color: var(--terminal-amber);
+            font-weight: bold;
+        }
+        
+        .terminal-command {
+            color: var(--terminal-cyan);
+        }
+        
+        .terminal-comment {
+            color: var(--terminal-gray);
+        }
+        
+        /* Mobile responsiveness */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -250,12 +552,34 @@
             
             .hero h1 {
                 font-size: 2.5rem;
+                letter-spacing: 2px;
             }
             
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: 1rem;
             }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Terminal cursor animation */
+        .terminal-cursor::after {
+            content: '█';
+            color: var(--terminal-green);
+            animation: cursor-blink 1s infinite;
+        }
+        
+        @keyframes cursor-blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
     </style>
 </head>
