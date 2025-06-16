@@ -274,18 +274,16 @@
         .btn-secondary::before {
             background: var(--terminal-amber);
         }
-        <section id="home" class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="terminal-glow">Libero GNU/Linux</h1>
-                    <p class="subtitle">Freedom in Computing - A specialized live distribution for system administration and legacy hardware</p>
-                    <div class="cta-buttons">
-                        <a href="#download" class="btn btn-primary">Download v1.1</a>
-                        <a href="https://github.com/liberolinux" class="btn btn-secondary" target="_blank">View on GitHub</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
+        .btn-secondary:hover {
+            color: var(--terminal-bg);
+            box-shadow: 0 0 20px var(--terminal-amber);
+        }
+        
+        .btn-secondary:hover::before {
+            width: 100%;
+            height: 100%;
+        }
         
         .features {
             background: var(--terminal-dark-gray);
@@ -383,17 +381,17 @@
             font-size: 2.5rem;
             color: var(--terminal-cyan);
             text-transform: uppercase;
-                <h3 style="margin-top: 3rem; color: var(--terminal-green); text-transform: uppercase;">Quick Start</h3>
-                <div class="code-block">
-<span class="terminal-comment"># Download and verify</span><br>
-<span class="terminal-command">wget</span> https://github.com/liberolinux/ISO/releases/download/v1.1/libero-admincd-i486-1.1.iso<br><br>
+            letter-spacing: 3px;
+        }
 
-<span class="terminal-comment"># Test with QEMU</span><br>
-<span class="terminal-command">qemu-system-i386</span> -m 1024 -cdrom libero-admincd-i486-1.1.iso<br><br>
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
 
-<span class="terminal-comment"># Write to CD (replace /dev/sr0 with your CD drive)</span><br>
-<span class="terminal-command">wodim</span> -v dev=/dev/sr0 speed=4 -eject libero-admincd-i486-1.1.iso<span class="terminal-cursor"></span>
-                </div>
+        .spec-item {
+            background: var(--terminal-bg);
             padding: 2rem;
             border: 1px solid var(--terminal-border);
             border-left: 4px solid var(--terminal-cyan);
@@ -420,21 +418,17 @@
         .spec-item p {
             color: var(--terminal-white);
         }
-                    <div class="code-block" style="text-align: left; max-width: 700px; margin: 1rem auto;">
-<span class="terminal-comment"># Minimum Requirements:</span><br>
-<span class="terminal-prompt">•</span> <span class="terminal-command">CPU:</span> i486 or higher (32-bit x86)<br>
-<span class="terminal-prompt">•</span> <span class="terminal-command">RAM:</span> 256 MB (512 MB recommended)<br>
-<span class="terminal-prompt">•</span> <span class="terminal-command">Storage:</span> CD/DVD drive or USB port<br>
-<span class="terminal-prompt">•</span> <span class="terminal-command">Network:</span> Ethernet or Wi-Fi for installer mode<br><br>
 
-<span class="terminal-comment"># Build Requirements:</span><br>
-<span class="terminal-prompt">•</span> <span class="terminal-command">Host OS:</span> Linux with root access<br>
-<span class="terminal-prompt">•</span> <span class="terminal-command">Dependencies:</span> bash, tar, wget, sudo, chroot<br>
-<span class="terminal-prompt">•</span> <span class="terminal-command">Tools:</span> squashfs-tools, grub2, xorriso, qemu<br>
-<span class="terminal-prompt">•</span> <span class="terminal-command">Storage:</span> ~10 GB free space<br>
-<span class="terminal-prompt">•</span> <span class="terminal-command">Network:</span> Internet connection<span class="terminal-cursor"></span>
-                    </div>
+        .download-section {
+            background: var(--terminal-bg);
+            padding: 6rem 0;
+        }
+
+        .download-section h2 {
+            text-align: center;
             margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--terminal-green);
             text-transform: uppercase;
             letter-spacing: 3px;
         }
