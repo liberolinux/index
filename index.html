@@ -137,7 +137,7 @@
             opacity: 0;
             transition: opacity 0.3s;
             position: absolute;
-            left: -12px;
+            left: 8px;
             top: 50%;
             transform: translateY(-50%);
         }
@@ -148,7 +148,7 @@
             opacity: 0;
             transition: opacity 0.3s;
             position: absolute;
-            right: -12px;
+            right: 8px;
             top: 50%;
             transform: translateY(-50%);
         }
@@ -563,18 +563,14 @@
             }
             
             .nav-links a::before {
-                left: -10px;
+                left: 4px;
             }
             
             .nav-links a::after {
-                right: -10px;
+                right: 4px;
             }
         }
         
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -621,12 +617,13 @@
                 font-size: 0.85rem;
                 margin: 0.5rem 0;
                 line-height: 1.4;
+            footer p {
+                font-size: 0.85rem;
+                margin: 0.5rem 0;
+                line-height: 1.4;
             }
         }
-        
-        /* Terminal cursor animation */
-        .terminal-cursor::after {
-            content: '█';
+        }
             color: var(--terminal-green);
             animation: cursor-blink 1s infinite;
         }
